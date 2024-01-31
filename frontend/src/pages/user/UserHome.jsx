@@ -4,7 +4,9 @@ import AuthContext from '../../context/AuthContext'
 const UserHome = () => {
   const {user} = useContext(AuthContext)
   return (
-    <p>home</p>
+    <>
+    {user && <p> {user.first_name}</p>}
+    </>
   )
 }
 

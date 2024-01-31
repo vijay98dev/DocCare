@@ -1,8 +1,9 @@
-import React,{useEffect,useRef} from 'react'
+import React,{useContext, useEffect,useRef} from 'react'
 import logo from '../../assets/images/logo.png'
 import {NavLink, Link } from 'react-router-dom'
 import {BiMenu} from 'react-icons/bi'
 import userImg from '../../assets/images/avatar-icon.png'
+import AuthContext from '../../context/AuthContext'
 
 const navLink =[
   {
@@ -32,6 +33,7 @@ const navLink =[
 ]
 
 const Header = () => {
+  const {user,userLogout} = useContext(AuthContext)
 
   const headerRef = useRef(null)
   const menuRef = useRef(null)
@@ -83,9 +85,12 @@ const Header = () => {
                   </figure>
                 </Link>
             </div>
+            {user ? <button className='bg-primaryColor m-2 py-0 px-2 text-white font-semibold h-[35px] flex items-center justify-center rounded-full' onClick={userLogout}>Logout</button>:(
             <Link to='/login'>
             <button className='bg-primaryColor m-2 py-0 px-2 text-white font-semibold h-[35px] flex items-center justify-center rounded-full'>Login</button>
             </Link>
+            )}
+            
             <span className='md:hidden' onClick={toggleMenu}>
                   <BiMenu className='w-5 h-5 cursor-pointer'/> 
             </span>
