@@ -17,11 +17,11 @@ export const AuthProvider = ({children}) => {
     const navigate =useNavigate()
     const [loading,setLoading] = useState(true)
 
-    const basUrl = 'http://127.0.0.1:8000'
+    const baseURL = 'http://127.0.0.1:8000'
 
     const isAuthenticated = async (e) => {
         e.preventDefault();
-        const response = await fetch(basUrl+'/token/', {
+        const response = await fetch(baseURL+'/token/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',  // Corrected the header name

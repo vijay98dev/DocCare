@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "corsheaders",
 ]
 
+AUTH_USER_MODEL = 'account.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
@@ -195,7 +196,7 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'account.User'
+
 
 CORS_ALLOW_ALL_ORIGINS= True
 
