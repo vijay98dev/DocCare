@@ -135,7 +135,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'doccare',
+        'NAME': 'main_project',
         'USER':'postgres',
         'PASSWORD':'admin',
         'HOST':'localhost',
