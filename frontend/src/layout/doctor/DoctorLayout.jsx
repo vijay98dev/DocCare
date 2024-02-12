@@ -2,7 +2,13 @@ import React from 'react'
 
 const DoctorLayout = () => {
   return (
-    <div>DoctorLayout</div>
+    <>
+    <Header/>
+    <main>
+        <Routers/>
+    </main>
+    <Footer/>
+    </>
   )
 }
 

@@ -8,6 +8,8 @@ from django.contrib.auth import login, authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from account.models import User
 from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticated
+
 
 
 @api_view(['GET'])
@@ -65,3 +67,21 @@ class UserLoginView(APIView):
 class UserDocListView(ListAPIView):
     queryset = User.objects.filter(is_doctor = True)
     serializer_class=UserSerializer
+
+
+
+class UserDetails(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        user = User.objects.get(id=request.user.id)
+       
+        data = UserSerializer(user).data
+        # try :
+        #     profile_pic = user.User_Profile.profile_pic
+        #     data['profile_pic'] = request.build_absolute_uri('/')[:-1]+profile_pic.url
+        # except:
+        #     profile_pic = ''
+        #     data['profile_pic']=''
+            
+        content = data
+        return Response(content)

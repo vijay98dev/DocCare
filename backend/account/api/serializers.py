@@ -10,6 +10,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Add custom claims
         token['first_name'] = user.first_name
+        token['is_admin'] = user.is_superuser
+        token['is_doctor'] = user.is_doctor
         # ...
         
         return token
@@ -38,10 +40,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id','first_name','phone_number','email','password']
-        extra_kwargs = {
-            'password':{ 'write_only':True}
-        }
+        exclude = ('password',)
 
 
 

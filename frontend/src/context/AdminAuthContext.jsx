@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const AuthContext =createContext()
+const AdminAuthContext =createContext()
 
 
-export default AuthContext;
+export default AdminAuthContext;
 
 
-export const AuthProvider = ({children}) => {
+export const AdminAuthProvider = ({children}) => {
     
     const [token, setToken] = useState(() =>localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null)
     const [user, setUser] = useState(() =>localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token')) : null)
@@ -19,7 +19,7 @@ export const AuthProvider = ({children}) => {
 
     const baseURL = 'http://127.0.0.1:8000'
 
-    const isAuthenticated = async (e) => {
+    const isAdminAuthenticated = async (e) => {
         e.preventDefault();
         const response = await fetch(baseURL+'/token/', {
             method: 'POST',
@@ -35,7 +35,7 @@ export const AuthProvider = ({children}) => {
             setToken(data)
             setUser(jwtDecode(data.access))
             localStorage.setItem('token',JSON.stringify(data))
-            navigate('/')
+            navigate('/adm')
         }else{
             alert('Something went wrong')
         }
@@ -45,7 +45,7 @@ export const AuthProvider = ({children}) => {
         setToken(null)
         setUser(null)
         localStorage.removeItem('token')
-        navigate('/')
+        navigate('/login')
     }
 
     const tokenRefresh = async (e) => {
@@ -70,7 +70,7 @@ export const AuthProvider = ({children}) => {
 
     const userData ={
         user:user,
-        isAuthenticated:isAuthenticated,
+        isAdminAuthenticated:isAdminAuthenticated,
         userLogout
     }
 
@@ -84,8 +84,8 @@ export const AuthProvider = ({children}) => {
         return ()=> clearInterval(interval)
     },[token,loading])
     return (
-        <AuthContext.Provider value={userData}>
+        <AdminAuthContext.Provider value={userData}>
             {children}
-        </AuthContext.Provider>
+        </AdminAuthContext.Provider>
     )
 }
