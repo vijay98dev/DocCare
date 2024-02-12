@@ -45,7 +45,7 @@ export const AdminAuthProvider = ({children}) => {
         setToken(null)
         setUser(null)
         localStorage.removeItem('token')
-        navigate('/login')
+        navigate('/adm/login')
     }
 
     const tokenRefresh = async (e) => {

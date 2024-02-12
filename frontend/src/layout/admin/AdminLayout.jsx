@@ -7,13 +7,15 @@ import { AdminAuthProvider } from '../../context/AdminAuthContext'
 const AdminLayout = () => {
   return (
     <>
+    <AdminAuthProvider>
     <AdminHeader/>
     <main>
-      <AdminAuthProvider>
+      
         <AdminRouter/>
-      </AdminAuthProvider>
+      
     </main>
     <Footer/>
+    </AdminAuthProvider>
     </>
   )
 }
