@@ -1,16 +1,12 @@
-import { createContext, useState, useEffect } from 'react'
-import { jwtDecode } from "jwt-decode"; 
-import { useNavigate } from 'react-router-dom';
+import { createContext } from "react";
 
 
+const DocAuthContext = createContext();
 
-const AdminAuthContext =createContext()
-
-
-export default AdminAuthContext;
+export default DocAuthContext;
 
 
-export const AdminAuthProvider = ({children}) => {
+export const DocAuthProvider = ({children}) => {
     
     const [token, setToken] = useState(() =>localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null)
     const [user, setUser] = useState(() =>localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token')) : null)
@@ -19,7 +15,7 @@ export const AdminAuthProvider = ({children}) => {
 
     const baseURL = 'http://127.0.0.1:8000'
 
-    const isAdminAuthenticated = async (e) => {
+    const isDocAuthenticated = async (e) => {
         e.preventDefault();
         const response = await fetch(baseURL+'/token/', {
             method: 'POST',
@@ -35,10 +31,10 @@ export const AdminAuthProvider = ({children}) => {
         if (response.status === 200){
             setToken(data)
             setUser(jwtDecode(data.access))
-            if (user && user.is_admin){
+            if (user && user.is_doctor){
             localStorage.setItem('token',JSON.stringify(data))
         }
-            navigate('/adm')
+            navigate('/doctor')
         }else{
             alert('Something went wrong')
         }
@@ -48,7 +44,7 @@ export const AdminAuthProvider = ({children}) => {
         setToken(null)
         setUser(null)
         localStorage.removeItem('token')
-        navigate('/adm/login')
+        navigate('/doctor/login')
     }
 
     const tokenRefresh = async (e) => {
@@ -65,7 +61,7 @@ export const AdminAuthProvider = ({children}) => {
         if (res.status === 200){
             setToken(result)
             setUser(jwtDecode(result.access))
-            if (user && user.is_admin){
+            if (user && user.is_doctor){
             localStorage.setItem('token',JSON.stringify(result))
         }
         }else{
@@ -75,7 +71,7 @@ export const AdminAuthProvider = ({children}) => {
 
     const userData ={
         user:user,
-        isAdminAuthenticated:isAdminAuthenticated,
+        isDocAuthenticated:isDocAuthenticated,
         userLogout
     }
 
@@ -89,8 +85,8 @@ export const AdminAuthProvider = ({children}) => {
         return ()=> clearInterval(interval)
     },[token,loading])
     return (
-        <AdminAuthContext.Provider value={userData}>
+        <DocAuthContext.Provider value={userData}>
             {children}
-        </AdminAuthContext.Provider>
+        </DocAuthContext.Provider>
     )
 }

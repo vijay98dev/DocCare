@@ -8,8 +8,8 @@ const AdminRouter = () => {
   return (
     <Routes>
         
-        <Route path='/' element={<AdminPrivateRoute><AdminHome/></AdminPrivateRoute>}/>
-        <Route path='/login' element={<AdminLogin/>}/>
+            <Route path='/' element={<AdminPrivateRoute> <AdminHome/> </AdminPrivateRoute>}/>
+            <Route path='/login' element={<AdminLogin/>}/>
         
     </Routes>
   )

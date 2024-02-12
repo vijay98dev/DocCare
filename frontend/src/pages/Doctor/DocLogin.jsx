@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import DocAuthContext from '../../context/DocAuthContext'
 
 const DocLogin = () => {
+    const {isDocAuthenticated} = useContext(DocAuthContext)
   return (
     <section className='px-5 lg:px-0'>
       <div className='w-full max-w-[570px] mx-auto rounded-lg shadow-md md:p-10'>
         <h1 className='text-headingColor text-[22px] leading-9 fond-bold mb-10'>Hello<span className='text-primaryColor'>  Welcome</span>   Back !!!!!!!!!</h1>
-        <form className='py-4 md:py-0' method='POST' >
+        <form className='py-4 md:py-0' method='POST' onSubmit={isDocAuthenticated} >
           <div className='mb-5'>
             <input type='email' placeholder='Enter your email' name='email' 
             className='w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[22px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer'  required/>

@@ -8,13 +8,11 @@ const AdminLayout = () => {
   return (
     <>
     <AdminAuthProvider>
-    <AdminHeader/>
-    <main>
-      
-        <AdminRouter/>
-      
-    </main>
-    <Footer/>
+        <AdminHeader/>
+        <main>
+            <AdminRouter/>
+        </main>
+        <Footer/>
     </AdminAuthProvider>
     </>
   )

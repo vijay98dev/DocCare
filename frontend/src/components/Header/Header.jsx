@@ -27,7 +27,7 @@ const navLink =[
     display:'Notification'
   },
   {
-    path:'/doctors',
+    path:'/doctor',
     display:'Doctors'
   },
 ]
