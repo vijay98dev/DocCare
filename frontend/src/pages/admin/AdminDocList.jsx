@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const AdminUserList = () => {
+const AdminDocList = () => {
   const baseURL = "http://127.0.0.1:8000";
   const [users,setUsers]= useState([]);
 
@@ -16,7 +16,7 @@ const AdminUserList = () => {
 
 
   useEffect (() => {
-    axios.get(baseURL+'/adm/user').then((response) =>{
+    axios.get(baseURL+'/adm/doctor/').then((response) =>{
       console.log(response)
       setUsers(response.data)
     }).catch((error) =>{
@@ -29,7 +29,7 @@ const AdminUserList = () => {
     <div className="flex justify-center items-center h-full w-full">
     <div className="max-w-sm rounded overflow-hidden shadow-lg">
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">Users</div>
+        <div className="font-bold text-xl mb-2">Doctors</div>
     <div className='table-fixed w-full'>
       
       <table className="min-w-full divide-y divide-gray-200">
@@ -64,4 +64,4 @@ const AdminUserList = () => {
 
 
 
-export default AdminUserList
+export default AdminDocList

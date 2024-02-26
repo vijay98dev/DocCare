@@ -16,7 +16,7 @@ const navLink =[
         display:'Users'
       },
     {
-      path:'/adm/doctors',
+      path:'/adm/doctor',
       display:'Doctors'
     },
 ]

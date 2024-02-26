@@ -1,12 +1,12 @@
 from account.models import User,UserProfile
 from rest_framework.generics import ListAPIView
-from account.api.serializers import UserSerializer
+from admin.api.serializers import AdminUserSerializer
 
-class UserListView(ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class AdminUserListView(ListAPIView):
+    queryset = User.objects.filter(is_doctor=False).order_by('-date_joined')
+    serializer_class = AdminUserSerializer
 
 
-class DoctorsListView(ListAPIView):
+class AdminDoctorsListView(ListAPIView):
     queryset = User.objects.filter(is_doctor = True)
-    serializer_class=UserSerializer
+    serializer_class=AdminUserSerializer
